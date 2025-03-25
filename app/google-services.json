@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "603308952792",
+    "project_id": "petfollow-4985b",
+    "storage_bucket": "petfollow-4985b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603308952792:android:04479fcb5d02910a119bad",
+        "android_client_info": {
+          "package_name": "com.kelleci.petsocial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLAtgtjE01FuH4O3sVMj3BMDj9Bgyt0OM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
