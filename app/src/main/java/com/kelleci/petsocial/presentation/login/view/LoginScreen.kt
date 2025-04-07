@@ -120,7 +120,6 @@ fun LoginScreen(
 
         Button(modifier = Modifier.fillMaxWidth(), onClick = {
 
-
         }) {
             Icon(painter = painterResource(R.drawable.google), "", modifier = Modifier.size(24.dp))
             Spacer(modifier = Modifier.width(10.dp))
@@ -128,8 +127,6 @@ fun LoginScreen(
 
         }
     }
-
-
 }
 
 fun isValidPassword(password: String): Boolean {
