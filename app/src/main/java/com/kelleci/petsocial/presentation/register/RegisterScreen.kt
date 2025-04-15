@@ -1,5 +1,7 @@
 package com.kelleci.petsocial.presentation.register
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,8 +37,7 @@ import java.util.UUID
 
 @Preview
 @Composable
-fun RegisterScreen(
-) {
+fun RegisterScreen() {
     var userID by remember { mutableStateOf("") }
     var userPetName by remember { mutableStateOf("") }
     val userPetSpecies by remember { mutableStateOf(false) }
@@ -46,6 +48,7 @@ fun RegisterScreen(
     val userPetSpay by remember { mutableStateOf(false) }
     var selectedPet by remember { mutableStateOf(RegisterConstant.petGenius[0]) }
     var selectedPetSpay by remember { mutableStateOf(RegisterConstant.petSpay[0]) }
+    val context = LocalContext.current
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -200,14 +203,15 @@ fun RegisterScreen(
         Spacer(modifier = Modifier.height(16.dp))
         Button(modifier = Modifier.fillMaxWidth(), onClick = {
             saveUserRegisterInfo(
-                userID,
-                userPetName,
-                userPetGenius,
-                userPetKg,
-                userPetAge,
-                userPetVaccine,
-                userPetSpecies,
-                userPetSpay
+                userID = userID,
+                userPetName = userPetName,
+                userPetGenius = userPetGenius,
+                userPetKg = userPetKg,
+                userPetAge = userPetAge,
+                userPetVaccine = userPetVaccine,
+                userPetSpecies = userPetSpecies,
+                userPetSpay = userPetSpay,
+                context = context
             )
         }) {
             Spacer(modifier = Modifier.width(10.dp))
@@ -223,7 +227,8 @@ fun saveUserRegisterInfo(
     userPetAge: String,
     userPetVaccine: String,
     userPetSpecies: Boolean,
-    userPetSpay: Boolean
+    userPetSpay: Boolean,
+    context: Context
 ) {
     if (userID.isNotEmpty() &&
         userPetName.isNotEmpty() &&
@@ -245,7 +250,9 @@ fun saveUserRegisterInfo(
         )
 
         //viewModel.saveRegisterInformation(userRegister)
-    }else{
-
+    } else {
+        Toast.makeText(
+            context, "Please check your informations", Toast.LENGTH_SHORT
+        ).show()
     }
 }
