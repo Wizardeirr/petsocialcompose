@@ -90,7 +90,11 @@ fun LoginScreen(
             singleLine = true,
             shape = RoundedCornerShape(9.dp),
             maxLines = 1,
-            supportingText = { Text("Şifre en az 6 haneli, 1 küçük ve 1 büyük harf içermelidir") },
+            supportingText = {
+                if (passwordValue != "") {
+                    Text("Şifre en az 6 haneli, 1 küçük ve 1 büyük harf içermelidir")
+                }
+            },
             isError = passwordValue.isNotEmpty() && !isValidPassword(passwordValue)
 
         )
