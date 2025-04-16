@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -45,6 +47,7 @@ fun RegisterScreen() {
     var userPetKg by remember { mutableStateOf("") }
     var userPetAge by remember { mutableStateOf("") }
     var userPetVaccine by remember { mutableStateOf("") }
+    var userMailAddress by remember { mutableStateOf("") }
     val userPetSpay by remember { mutableStateOf(false) }
     var selectedPet by remember { mutableStateOf(RegisterConstant.petGenius[0]) }
     var selectedPetSpay by remember { mutableStateOf(RegisterConstant.petSpay[0]) }
@@ -183,21 +186,47 @@ fun RegisterScreen() {
             maxLines = 1,
 
             )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        TextField(
+            value = userMailAddress,
+            onValueChange = { newValue ->
+                userMailAddress = newValue
+            },
+            modifier = Modifier,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Email
+            ),
+            keyboardActions = KeyboardActions(),
+            label = { Text("E-posta") },
+            singleLine = true,
+            shape = RoundedCornerShape(9.dp),
+            maxLines = 1,
+
+            )
         Spacer(modifier = Modifier.height(16.dp))
 
         RegisterConstant.petSpay.forEach { text ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Modifier
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
                     .fillMaxWidth()
-                    .selectable(
-                        selected = (text == selectedPetSpay),
-                        onClick = { selectedPetSpay = text })
-                    .padding(10.dp)
+                    .padding(9.dp)
+            ) {
+                RadioButton(
+                    selected = (text == selectedPetSpay),
+                    onClick = { selectedPetSpay = text },
+                    modifier = Modifier.size(20.dp)
+                        .align(Alignment.CenterVertically)
+                )
             }
             Text(
                 text = text,
-                fontSize = 16.sp,
-                modifier = Modifier.padding(start = 10.dp)
+                fontSize = 14.sp,
+                modifier = Modifier
+                    .padding(start = 4.dp)
+                    .align(CenterHorizontally)
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
