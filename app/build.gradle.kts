@@ -1,18 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     kotlin("kapt")
 
 }
 
 android {
     namespace = "com.kelleci.petsocial"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.kelleci.petsocial"
         minSdk = 28
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -21,6 +22,11 @@ android {
             useSupportLibrary = true
         }
     }
+    buildFeatures{
+        compose = true
+    }
+
+
 
     buildTypes {
         release {
@@ -42,7 +48,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -55,6 +61,7 @@ android {
 
 }
 
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -66,6 +73,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.test.android)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,7 +86,6 @@ dependencies {
     implementation(libs.google.dagger.hilt)
     //firebase
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.firestore)
     implementation (libs.lifecycle.livedata.ktx)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.navigation.compose)
