@@ -1,4 +1,4 @@
-package com.kelleci.petsocial.presentation.login.view
+package com.kelleci.petsocial.presentation.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -128,6 +128,21 @@ fun LoginScreen(
             Icon(painter = painterResource(R.drawable.google), "", modifier = Modifier.size(24.dp))
             Spacer(modifier = Modifier.width(10.dp))
             Text("Google İle Giriş Yap")
+
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(modifier = Modifier.fillMaxWidth(), onClick = {
+            navController.navigate(Screen.TelephoneLoginScreen.route)
+
+        }) {
+            Icon(
+                painter = painterResource(R.drawable.baseline_phone_24),
+                "",
+                modifier = Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text("Telefon Numarası İle Giriş Yap")
 
         }
     }
