@@ -1,4 +1,4 @@
-package com.kelleci.petsocial.presentation.login
+package com.kelleci.petsocial.presentation.login.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
