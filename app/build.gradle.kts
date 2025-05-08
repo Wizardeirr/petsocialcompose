@@ -57,6 +57,9 @@ android {
     }
     kapt {
         correctErrorTypes = true
+        javacOptions {
+            option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+        }
     }
 
 }
