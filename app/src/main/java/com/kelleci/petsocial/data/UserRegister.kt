@@ -3,7 +3,7 @@ package com.kelleci.petsocial.data
 import java.util.UUID
 
 data class UserRegister(
-    val userID: String,
+    var userID: String,
     val userPetName : String,
     val userPetSpecies: Boolean,
     val userPetGenius : String,

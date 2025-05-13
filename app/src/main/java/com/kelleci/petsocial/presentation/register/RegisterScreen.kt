@@ -1,7 +1,5 @@
 package com.kelleci.petsocial.presentation.register
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,6 +19,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,12 +33,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kelleci.petsocial.data.UserRegister
-import java.util.UUID
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Preview
 @Composable
-fun RegisterScreen() {
+fun RegisterScreen(
+) {
     var userID by remember { mutableStateOf("") }
     var userPetName by remember { mutableStateOf("") }
     val userPetSpecies by remember { mutableStateOf(false) }
@@ -48,11 +47,23 @@ fun RegisterScreen() {
     var userPetAge by remember { mutableStateOf("") }
     var userPetVaccine by remember { mutableStateOf("") }
     var userMailAddress by remember { mutableStateOf("") }
+    val userPassword by remember { mutableStateOf("") }
     val userPetSpay by remember { mutableStateOf(false) }
     var selectedPet by remember { mutableStateOf(RegisterConstant.petGenius[0]) }
     var selectedPetSpay by remember { mutableStateOf(RegisterConstant.petSpay[0]) }
     val context = LocalContext.current
+    val registerViewModel: RegisterViewModel = viewModel()
 
+
+    LaunchedEffect(key1 = Unit){
+
+        registerViewModel.loading.collect{
+            if (it){
+
+            }
+        }
+
+    }
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = CenterHorizontally,
@@ -60,6 +71,7 @@ fun RegisterScreen() {
             .padding(1.dp)
             .fillMaxSize()
     ) {
+
         TextField(
             value = userID,
             onValueChange = { newValue ->
@@ -217,7 +229,8 @@ fun RegisterScreen() {
                 RadioButton(
                     selected = (text == selectedPetSpay),
                     onClick = { selectedPetSpay = text },
-                    modifier = Modifier.size(20.dp)
+                    modifier = Modifier
+                        .size(20.dp)
                         .align(Alignment.CenterVertically)
                 )
             }
@@ -231,7 +244,7 @@ fun RegisterScreen() {
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(modifier = Modifier.fillMaxWidth(), onClick = {
-            saveUserRegisterInfo(
+            registerViewModel.saveUserRegisterInfo(
                 userID = userID,
                 userPetName = userPetName,
                 userPetGenius = userPetGenius,
@@ -240,7 +253,10 @@ fun RegisterScreen() {
                 userPetVaccine = userPetVaccine,
                 userPetSpecies = userPetSpecies,
                 userPetSpay = userPetSpay,
-                context = context
+                context = context,
+                userEmail = userMailAddress,
+                userPassword = userPassword
+
             )
         }) {
             Spacer(modifier = Modifier.width(10.dp))
@@ -249,39 +265,4 @@ fun RegisterScreen() {
     }
 
 
-}
-
-fun saveUserRegisterInfo(
-    userID: String, userPetName: String, userPetGenius: String, userPetKg: String,
-    userPetAge: String,
-    userPetVaccine: String,
-    userPetSpecies: Boolean,
-    userPetSpay: Boolean,
-    context: Context
-) {
-    if (userID.isNotEmpty() &&
-        userPetName.isNotEmpty() &&
-        userPetGenius.isNotEmpty() &&
-        userPetKg.isNotEmpty() &&
-        userPetAge.isNotEmpty() &&
-        userPetVaccine.isNotEmpty()
-    ) {
-        val userRegister = UserRegister(
-            userID = userID,
-            userPetSpecies = userPetSpecies,
-            userPetGenius = userPetGenius,
-            userPetKg = userPetKg,
-            userPetAge = userPetAge,
-            userPetVaccine = userPetVaccine,
-            userPetSpay = userPetSpay,
-            userPetName = userPetName,
-            userUUID = UUID.randomUUID()
-        )
-
-        //viewModel.saveRegisterInformation(userRegister)
-    } else {
-        Toast.makeText(
-            context, "Please check your informations", Toast.LENGTH_SHORT
-        ).show()
-    }
 }
