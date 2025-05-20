@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TelephoneLoginScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
 ) {
 
     var telephoneNumber = ""
@@ -53,7 +53,6 @@ fun TelephoneLoginScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(modifier = Modifier.fillMaxWidth(), onClick = {
-
             }) {
                 Spacer(modifier = Modifier.width(10.dp))
                 Text("Devam")
